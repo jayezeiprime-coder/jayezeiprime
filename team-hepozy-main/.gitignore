@@ -1,0 +1,17 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*credentials*
+*secret*
+config/secrets.*
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor junk
+.DS_Store
