@@ -5,6 +5,8 @@ import time
 import asyncio
 import logging
 from datetime import datetime, timezone, timedelta
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from fastapi import FastAPI, HTTPException, Header, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,7 +35,6 @@ OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
 
 TOKEN_LIMIT        = 5000
 WINDOW_HOURS       = 10
-
 
 
 async def _run_sync(fn, *args, **kwargs):
@@ -398,6 +399,20 @@ async def export_pdf(conversation_id: str,
 # ══════════════════════════════════════════════════════════════════════
 # RUN
 # ══════════════════════════════════════════════════════════════════════
+
+@app.get("/login")
+async def serve_login():
+    return FileResponse("login.html")
+
+@app.get("/register")
+async def serve_register():
+    return FileResponse("register.html")
+
+@app.get("/home")
+async def serve_home():
+    return FileResponse("home.html")
+
+app.mount("/", StaticFiles(directory="."), name="static")
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,5 +1,5 @@
 // Config
-const API = 'http://localhost:8001';
+const API = '';
 
 // Frontend timeout for sending messages.
 // Keep this slightly longer than the backend timeout.
